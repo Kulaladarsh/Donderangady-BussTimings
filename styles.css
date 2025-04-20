@@ -1,288 +1,321 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-/* Base Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* === General Styles === */
 html, body {
   height: 100%;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(270deg, #f5f7fa, #c3cfe2, #bbdefb, #f5f7fa);
-  background-size: 800% 800%;
-  animation: gradientWaves 20s ease infinite;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f8;
   color: #333;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s, color 0.3s;
+  scroll-behavior: smooth;
 }
 
-@keyframes gradientWaves {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 50% 50%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 50%; }
-  100% { background-position: 0% 50%; }
+body {
+  flex: 1 0 auto;
 }
 
-/* Container */
+/* Dark mode support */
+.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+/* Container for main content */
 .container {
-  flex: 1;
-  max-width: 1200px;
+  flex: 1 0 auto;
+  max-width: 960px;
   margin: auto;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
 }
 
-/* Heading */
+/* === Header Section === */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+  animation: fadeSlideUp 1s ease-out both;
+}
+
 h1 {
   font-size: 2.5rem;
-  text-align: center;
   margin-bottom: 10px;
-  color: #0d47a1;
-  animation: slideIn 1.2s ease-out;
+  animation: fadeSlideUp 1.2s ease-out both;
 }
 
-.subtitle, 
-.container > p {
+/* Clock style with animation */
+.clock {
+  font-size: 1.5rem;
+  margin: 10px 0 20px;
+  font-weight: bold;
+  animation: rotateClock 60s linear infinite, fadeSlideUp 1.5s ease-out both;
+  display: inline-block;
+}
+
+/* Sub heading / description */
+.subtitle {
   text-align: center;
   font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  color: gray;
 }
 
-/* Schedule Section */
+/* === Schedule Layout === */
 .schedule {
   display: flex;
-  gap: 30px;
-  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
 .column {
-  flex: 1 1 45%;
-  min-width: 300px;
-  background: #f9f9f9;
+  flex: 1;
+  min-width: 280px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  animation: fadeSlideUp 1s ease-out both;
+  animation-delay: 0.5s;
+}
+
+/* Dark mode column */
+.dark .column {
+  background: #1e1e1e;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* === Collapsibles (toggle sections) === */
+.collapsible, .sub-collapsible {
+  cursor: pointer;
+  background: #e3eaf0;
+  padding: 12px 16px;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, background 0.3s ease;
+  margin-top: 12px;
+  font-weight: 600;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #1e88e5;
 }
 
-.column:hover {
-  transform: translateY(-5px);
+.collapsible:hover, .sub-collapsible:hover {
+  background: #d0dbe5;
+  animation: pulseGlow 1.5s infinite alternate;
 }
 
-.column h2 {
-  font-size: 1.5rem;
-  color: #1565c0;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #1976d2;
-  padding-bottom: 5px;
-  text-align: center;
+.dark .collapsible, .dark .sub-collapsible {
+  background: #2a2a2a;
+  border-left-color: #64b5f6;
 }
 
-/* List Items */
-ul {
-  list-style: none;
-  padding-left: 0;
+.collapsible.active, .sub-collapsible.active {
+  background: #c5d4e3;
+}
+
+.dark .collapsible.active, .dark .sub-collapsible.active {
+  background: #333;
+}
+
+/* Nested collapsible content */
+.content {
+  display: none;
+  padding-left: 15px;
+  margin-top: 8px;
+  list-style-type: none;
+  border-left: 2px dashed #aaa;
 }
 
 li {
-  padding: 10px 15px;
-  border-bottom: 1px solid #ddd;
-  font-size: 1rem;
-  color: #333;
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 6px 0;
+  padding: 6px 8px;
+  background: #f0f4f7;
+  border-radius: 6px;
 }
 
-li:nth-child(odd) {
-  background-color: #f1f8ff;
+.dark li {
+  background: #2d2d2d;
+  color: #ddd;
 }
 
-li:hover {
-  background-color: #e3f2fd;
-  transform: translateX(5px);
+/* === Buttons === */
+.show-all-btn {
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-li:last-child {
-  border-bottom: none;
+.show-all-btn:hover {
+  background-color: #1565c0;
+  animation: futuristicHover 0.6s ease-in-out forwards;
 }
 
-/* Footer */
+.dark .show-all-btn {
+  background: #64b5f6;
+  color: #000;
+}
+
+/* Dark/Light toggle button */
+#toggleMode {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 6px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  background: #1e88e5;
+  color: white;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+#toggleMode:hover {
+  background: #1565c0;
+  animation: futuristicHover 0.6s ease-in-out forwards;
+}
+
+.dark #toggleMode {
+  background: #f1f1f1;
+  color: #121212;
+  animation: glowButton 3s infinite ease-in-out;
+}
+
+/* === Footer === */
 .footer {
   width: 100%;
-  max-width: 1200px;
-  margin: 40px auto 0 auto;
-  padding: 10px 10px;
-  background-color: #e3f2fd;
-  border-top: 1px solid #ccc;
-  font-size: 1rem;
-  color: #444;
+  padding: 16px;
+  background-color: #1e88e5;
+  font-size: 0.9rem;
+  color: #fff;
   border-radius: 0 0 12px 12px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
+  box-shadow: 0 -4px 12px rgba(30, 136, 229, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   box-sizing: border-box;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.footer strong {
-  color: #1565c0;
-}
-
-.footer a {
-  color: #1565c0;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.footer a:hover,
-.footer a:focus {
-  text-decoration: underline;
-}
-
-/* Responsive Footer */
-@media (max-width: 600px) {
-  .footer {
-    padding: 15px 10px;
-    font-size: 0.9rem;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-  .column {
-    flex: 1 1 100%;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  .column h2 {
-    font-size: 1.3rem;
-  }
-
-  li {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  li {
-    font-size: 0.9rem;
-  }
-}
-
-/* Animations */
-@keyframes slideIn {
-  0% {
-    transform: translateY(-30px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
-
-/* Gmail Icon Hover */
+/* Gmail icon inside footer */
 .gmail-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
   vertical-align: middle;
+}
+
+/* Wrapper for footer content */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding-inline: 10px;
+  box-sizing: border-box;
+}
+
+/* Contact section in footer */
+.footer-contact {
+  display: flex;
+  align-items: center;
+}
+
+/* Footer icon links (social/contact) */
+.footer-icon-link {
+  display: inline-block;
+  margin-left: 10px;
   transition: transform 0.3s ease;
 }
 
-.gmail-link:hover .gmail-icon {
+.footer-icon-link:hover {
   transform: scale(1.2);
+  animation: futuristicHover 0.6s ease-in-out forwards;
 }
 
-/* ---------------- DARK MODE ---------------- */
-@media (prefers-color-scheme: dark) {
-  html, body {
-    background: linear-gradient(270deg, #1e1e1e, #2e2e2e, #121212, #1e1e1e);
-    color: #f0f0f0;
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .schedule {
+    flex-direction: column;
   }
 
-  .container {
-    background: rgba(30, 30, 30, 0.95);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
+  .header {
+    height: auto;
+    padding: 40px 20px;
   }
 
   h1 {
-    color: #90caf9;
+    font-size: 2rem;
   }
 
-  .subtitle, .container > p {
-    color: #ccc;
-  }
-
-  .column {
-    background: #2b2b2b;
-    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
-  }
-
-  .column h2 {
-    color: #64b5f6;
-    border-bottom: 2px solid #42a5f5;
-  }
-
-  li {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-    border-bottom: 1px solid #444;
-  }
-
-  li:nth-child(odd) {
-    background-color: #2a2a2a;
-  }
-
-  li:hover {
-    background-color: #333;
+  .clock {
+    font-size: 1.2rem;
   }
 
   .footer {
-    background-color: #1f1f1f;
-    color: #ccc;
-    border-top: 1px solid #444;
+    padding: 12px;
+    font-size: 0.85rem;
   }
 
-  .footer strong,
-  .footer a {
-    color: #90caf9;
+  .footer-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
   }
 
-  .footer a:hover {
-    text-decoration: underline;
+  .footer-contact {
+    justify-content: center;
   }
+}
+
+/* === Animations === */
+
+/* Rotating clock animation */
+@keyframes rotateClock {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Fade + slide up animation */
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Glowing pulse effect */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(30, 136, 229, 0.3), 0 0 20px rgba(30, 136, 229, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(30, 136, 229, 0.6), 0 0 30px rgba(30, 136, 229, 0.4);
+  }
+}
+
+/* Hover futuristic effect */
+@keyframes futuristicHover {
+  0% {
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: scale(1.03);
+    filter: hue-rotate(20deg);
+  }
+}
+
+/* Button glow for dark mode toggle */
+@keyframes glowButton {
+  0% { box-shadow: 0 0 0px rgba(100, 181, 246, 0.7); }
+  50% { box-shadow: 0 0 20px rgba(100, 181, 246, 0.9); }
+  100% { box-shadow: 0 0 0px rgba(100, 181, 246, 0.7); }
 }
