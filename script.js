@@ -140,108 +140,107 @@ const udupiForenoon = [
   }
 
 
-
-
   const stars = document.querySelectorAll('.star');
-const summary = document.getElementById('rating-summary');
-
-// Initialize or get from localStorage
-let totalRatings = parseInt(localStorage.getItem('totalRatings')) || 0;
-let ratingSum = parseInt(localStorage.getItem('ratingSum')) || 0;
-
-// Check if user has already rated (set to 'true' when they rate once)
-let hasRated = localStorage.getItem('hasRated') === 'true';
-
-// Store the user's rating if available
-let userRating = parseInt(localStorage.getItem('userRating')) || null;
-
-updateSummary();
-
-if (userRating !== null) {
-  // Set the rating as selected if the user has already rated
-  setRating(userRating);
-}
-
-stars.forEach(star => {
-  star.addEventListener('mouseover', () => {
-    if (!hasRated) {
-      highlightStars(parseInt(star.dataset.rating));
-    }
-  });
-
-  star.addEventListener('mouseout', () => {
-    if (!hasRated) {
-      clearHighlight();
-    }
-  });
-
-  star.addEventListener('click', () => {
-    const rating = parseInt(star.dataset.rating);
-
-    // If the user is clicking on their previously selected rating, delete it
-    if (hasRated && userRating === rating) {
-      // Reset the rating
-      totalRatings--;
-      ratingSum -= rating;
-
-      localStorage.removeItem('hasRated'); // Remove the 'hasRated' flag
-      localStorage.removeItem('userRating'); // Remove the user's rating
-
-      // Update the UI
-      clearRating();
-      updateSummary();
-
-      alert('Your rating has been deleted.');
-      return;
-    }
-
-    // Prevent rating if user has already rated
-    if (hasRated) {
-      alert("You already rated.");
-      return;
-    }
-
-    // Save the rating
-    totalRatings++;
-    ratingSum += rating;
-    localStorage.setItem('totalRatings', totalRatings);
-    localStorage.setItem('ratingSum', ratingSum);
-    localStorage.setItem('hasRated', 'true');  // Mark as rated (lifetime)
-    localStorage.setItem('userRating', rating); // Store the user's rating
-
-    setRating(rating);
-    updateSummary();
-    alert(`Thanks for rating ${rating} star(s)!`);
-  });
-});
-
-function highlightStars(rating) {
-  stars.forEach(star => {
-    star.classList.toggle('hovered', parseInt(star.dataset.rating) <= rating);
-  });
-}
-
-function clearHighlight() {
-  stars.forEach(star => star.classList.remove('hovered'));
-}
-
-function setRating(rating) {
-  stars.forEach(star => {
-    star.classList.toggle('selected', parseInt(star.dataset.rating) <= rating);
-  });
-}
-
-function clearRating() {
-  stars.forEach(star => {
-    star.classList.remove('selected');
-  });
-}
-
-function updateSummary() {
-  if (totalRatings === 0) {
-    summary.innerText = '⭐ No ratings yet';
-  } else {
-    const average = (ratingSum / totalRatings).toFixed(1);
-    summary.innerText = `⭐ ${average} from ${totalRatings} user(s)`;
+  const summary = document.getElementById('rating-summary');
+  
+  // Initialize or get from localStorage
+  let totalRatings = parseInt(localStorage.getItem('totalRatings')) || 0;
+  let ratingSum = parseInt(localStorage.getItem('ratingSum')) || 0;
+  
+  // Check if user has already rated (set to 'true' when they rate once)
+  let hasRated = localStorage.getItem('hasRated') === 'true';
+  
+  // Store the user's rating if available
+  let userRating = parseInt(localStorage.getItem('userRating')) || null;
+  
+  updateSummary();
+  
+  if (userRating !== null) {
+    // Set the rating as selected if the user has already rated
+    setRating(userRating);
   }
-}
+  
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      if (!hasRated) {
+        highlightStars(parseInt(star.dataset.rating));
+      }
+    });
+  
+    star.addEventListener('mouseout', () => {
+      if (!hasRated) {
+        clearHighlight();
+      }
+    });
+  
+    star.addEventListener('click', () => {
+      const rating = parseInt(star.dataset.rating);
+  
+      // If the user is clicking on their previously selected rating, delete it
+      if (hasRated && userRating === rating) {
+        // Reset the rating
+        totalRatings--;
+        ratingSum -= rating;
+  
+        localStorage.removeItem('hasRated'); // Remove the 'hasRated' flag
+        localStorage.removeItem('userRating'); // Remove the user's rating
+  
+        // Update the UI
+        clearRating();
+        updateSummary();
+  
+        alert('Your rating has been deleted. You can rate again.');
+        return;
+      }
+  
+      // Prevent rating if user has already rated, unless deleting or re-rating
+      if (hasRated && userRating !== rating) {
+        alert("You already rated. To change your rating, delete it first.");
+        return;
+      }
+  
+      // Save the rating
+      totalRatings++;
+      ratingSum += rating;
+      localStorage.setItem('totalRatings', totalRatings);
+      localStorage.setItem('ratingSum', ratingSum);
+      localStorage.setItem('hasRated', 'true');  // Mark as rated (lifetime)
+      localStorage.setItem('userRating', rating); // Store the user's rating
+  
+      setRating(rating);
+      updateSummary();
+      alert(`Thanks for rating ${rating} star(s)!`);
+    });
+  });
+  
+  function highlightStars(rating) {
+    stars.forEach(star => {
+      star.classList.toggle('hovered', parseInt(star.dataset.rating) <= rating);
+    });
+  }
+  
+  function clearHighlight() {
+    stars.forEach(star => star.classList.remove('hovered'));
+  }
+  
+  function setRating(rating) {
+    stars.forEach(star => {
+      star.classList.toggle('selected', parseInt(star.dataset.rating) <= rating);
+    });
+  }
+  
+  function clearRating() {
+    stars.forEach(star => {
+      star.classList.remove('selected');
+    });
+  }
+  
+  function updateSummary() {
+    if (totalRatings === 0) {
+      summary.innerText = '⭐ No ratings yet';
+    } else {
+      const average = (ratingSum / totalRatings).toFixed(1);
+      summary.innerText = `⭐ ${average} from ${totalRatings} user(s)`;
+    }
+  }
+  
