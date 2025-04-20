@@ -8,98 +8,53 @@
 </head>
 <body>
   <div class="container">
-    <h1>Never Miss a Bus Again</h1>
-    <p class="subtitle">Check all Donderangady bus schedules right here</p>
+    <header><center><h1>Donderangady Bus Timings</h1>
+      <div id="clock"></div> </center>
+      
+      <p class="subtitle">🚍 Donderangady Bus Schedules at Your Fingertips! 🕒 Plan your ride, stay on time, and travel with ease! 🌟</p>
+
+      <button id="toggleMode">🌗Dark/Light</button>
+    </header>
 
     <div class="schedule">
+      <!-- Udupi Route -->
       <div class="column">
-        <h2>Donderangady to Udupi</h2>
-        <ul>
-          <li>6:45 AM - Hari</li>
-          <li>7:15 AM - Apsara</li>
-          <li>7:30 AM - Lakshmisha </li>
-          <li>7:45 AM - Ashok (Manai)</li>
-          <li>8:00 AM - Apsara</li>
-          <li>8:20 AM - Apsara</li>
-          <li>8:45 AM - S.V.T</li>
-          <li>9:20 AM - S.V.T</li>
-          <li>9:35 AM - Hari</li>
-          <li>9:50 AM - Rama</li>
-          <li>10:10 AM - Dingla</li>
-          <li>10:30 AM - Ashok(Manai)</li>
-          <li>10:45 AM - Spoorthi</li>
-          <li>11:10 AM - Apsara</li>
-          <li>11:25 AM - JuniorGopal</li>
-          <li>11:45 AM - Lakshmisha</li>
-          <li>12:10 PM - S.V.T</li>
-          <li>12:30 PM - Apsara</li>
-          <li>1:15 PM - Rama</li>
-          <li>1:35 PM - S.V.T</li>
-          <li>2:00 PM - Apsara</li>
-          <li>2:30 PM - Dingla</li>
-          <li>2:50 PM - Hari</li>
-          <li>3:20 PM - Ashok(Manai)</li>
-          <li>3:40 PM - Apsara</li>
-          <li>4:00 PM - Lakshmisha</li>
-          <li>4:30 PM - Apsara</li>
-          <li>5:00 PM - S.V.T</li>
-          <li>5:20 PM - Apsara </li>
-          <li>5:35 PM - JuniorGopal</li>
-          <li>6:00 PM - S.V.T</li>
-          <li>6:15 PM - Rama</li>
-          <li>7:00 PM - Dingla</li>
-        </ul>
+        <h2 class="collapsible">Donderangady to Udupi</h2>
+        <div class="nested">
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn" aria-label="Show all buses for Forenoon">Show All</button></h3>
+          <ul class="content" id="udupi-forenoon"></ul>
+
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn" aria-label="Show all buses for Afternoon">Show All</button></h3>
+          <ul class="content" id="udupi-afternoon"></ul>
+        </div>
       </div>
 
+      <!-- Ajekar Route -->
       <div class="column">
-        <h2>Donderangady to Ajekar</h2>
-        <center>
-        <ul>
-          <li>7:30 AM - S.V.T</li>
-          <li>7:45 AM - Rama(to karkala)</li>
-          <li>8:30 AM - S.V.T</li>
-          <li>8:40 Am - Dingla</li>
-          <li>9:05 AM - JuniorGopal</li>
+        <h2 class="collapsible">Donderangady to Ajekar</h2>
+        <div class="nested">
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn" aria-label="Show all buses for Forenoon">Show All</button></h3>
+          <ul class="content" id="ajekar-forenoon"></ul>
 
-          <li>9:20 AM - Ashok</li>
-          <li>9:50 AM - Apsara</li>
-          
-          <li>10:20 AM - Lakshmisha</li>
-          
-          <li>10:45 AM - Rama</li>
-          <li>11:10 AM - S.V.T</li>
-          <li>11:35 AM - Apsara</li>
-          <li>12:00 PM - Apsara</li>
-          <li>12:15 PM - S.V.T</li>
-          <li>12:30 PM - Hari</li>
-          <li>1:20 PM - Ashok</li>
-          <li>1:55 PM - Dingla</li>
-          <li>2:05 PM - Apsara</li>
-          <li>2:35 PM - JuniorGopal</li>
-          <li>2:50 PM - Lakshmisha</li>
-          <li>3:30 PM - Apsara</li>
-          <li>3:50 PM - S.V.T</li>
-          <li>4:15 PM - Rama</li>
-          <li>4:45 PM - Apsara</li>
-          <li>5:20 PM - S.V.T</li>
-          <li>5:50 PM - Dingla</li>
-          <li>6:10 PM - Apsara</li>
-          <li>6:20 PM - Ashok</li>
-          <li>6:30 PM - Hari</li>
-          <li>7:15 PM - Lakshmisha</li>
-          <li>7:35 PM - Apsara</li>
-          <li>8:00 PM - S.V.T</li>
-          <li>8:40 PM - Apsara</li>
-        </ul></center>
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn" aria-label="Show all buses for Afternoon">Show All</button></h3>
+          <ul class="content" id="ajekar-afternoon"></ul>
+        </div>
       </div>
-      <p><center>Developed by <strong>Adarsh Kulal.</strong> Contact on Email - <a href="kulaladarsh1@gmail.com" class="gmail-link" target="_blank" rel="noopener">
-        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="gmail-icon">
-      </a>
-      </a></p>
     </div>
   </div>
 
-    
-    
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Developed by <strong>Adarsh Kulal</strong></p>
+      <div class="footer-contact">
+        <span>Follow on </span>
+        <a href="mailto:kulaladarsh1@gmail.com" aria-label="Email Adarsh Kulal" class="footer-icon-link">
+          <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="gmail-icon" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
