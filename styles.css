@@ -16,13 +16,12 @@ body {
   flex: 1 0 auto;
 }
 
-/* Dark mode support */
 .dark {
   background: #121212;
   color: #f1f1f1;
 }
 
-/* Container for main content */
+/* === Container === */
 .container {
   flex: 1 0 auto;
   max-width: 960px;
@@ -30,7 +29,7 @@ body {
   padding: 20px;
 }
 
-/* === Header Section === */
+/* === Header === */
 .header {
   display: flex;
   flex-direction: column;
@@ -48,7 +47,6 @@ h1 {
   animation: fadeSlideUp 1.2s ease-out both;
 }
 
-/* Clock style with animation */
 .clock {
   font-size: 1.5rem;
   margin: 10px 0 20px;
@@ -57,7 +55,6 @@ h1 {
   display: inline-block;
 }
 
-/* Sub heading / description */
 .subtitle {
   text-align: center;
   font-size: 1.1rem;
@@ -81,15 +78,16 @@ h1 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   animation: fadeSlideUp 1s ease-out both;
   animation-delay: 0.5s;
+  box-sizing: border-box;
 }
 
-/* Dark mode column */
 .dark .column {
-  background: #1e1e1e;
+  background-color: #121212;
+  color: white;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
-/* === Collapsibles (toggle sections) === */
+/* === Collapsibles === */
 .collapsible, .sub-collapsible {
   cursor: pointer;
   background: #e3eaf0;
@@ -109,28 +107,39 @@ h1 {
   animation: pulseGlow 1.5s infinite alternate;
 }
 
-.dark .collapsible, .dark .sub-collapsible {
-  background: #2a2a2a;
-  border-left-color: #64b5f6;
-}
-
 .collapsible.active, .sub-collapsible.active {
   background: #c5d4e3;
 }
 
-.dark .collapsible.active, .dark .sub-collapsible.active {
+.dark .collapsible,
+.dark .sub-collapsible {
+  background: #2a2a2a;
+  border-left-color: #64b5f6;
+}
+
+.dark .collapsible.active,
+.dark .sub-collapsible.active {
   background: #333;
 }
 
-/* Nested collapsible content */
+/* === Collapsible Content === */
 .content {
   display: none;
-  padding-left: 15px;
+  padding: 10px 15px;
   margin-top: 8px;
   list-style-type: none;
   border-left: 2px dashed #aaa;
+  box-sizing: border-box;
 }
 
+.dark .content {
+  background-color: #1a1a1a;
+  border-left-color: #444;
+  color: #fff;
+  display: block; /* Show if JS fails */
+}
+
+/* === List Items === */
 li {
   margin: 6px 0;
   padding: 6px 8px;
@@ -165,7 +174,6 @@ li {
   color: #000;
 }
 
-/* Dark/Light toggle button */
 #toggleMode {
   display: inline-block;
   margin: 20px auto;
@@ -206,13 +214,11 @@ li {
   box-sizing: border-box;
 }
 
-/* Gmail icon inside footer */
 .gmail-icon {
   width: 20px;
   vertical-align: middle;
 }
 
-/* Wrapper for footer content */
 .footer-content {
   display: flex;
   justify-content: space-between;
@@ -224,13 +230,11 @@ li {
   box-sizing: border-box;
 }
 
-/* Contact section in footer */
 .footer-contact {
   display: flex;
   align-items: center;
 }
 
-/* Footer icon links (social/contact) */
 .footer-icon-link {
   display: inline-block;
   margin-left: 10px;
@@ -278,20 +282,16 @@ li {
 }
 
 /* === Animations === */
-
-/* Rotating clock animation */
 @keyframes rotateClock {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* Fade + slide up animation */
 @keyframes fadeSlideUp {
   0% { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Glowing pulse effect */
 @keyframes pulseGlow {
   0%, 100% {
     box-shadow: 0 0 10px rgba(30, 136, 229, 0.3), 0 0 20px rgba(30, 136, 229, 0.2);
@@ -301,7 +301,6 @@ li {
   }
 }
 
-/* Hover futuristic effect */
 @keyframes futuristicHover {
   0% {
     transform: scale(1);
@@ -313,9 +312,35 @@ li {
   }
 }
 
-/* Button glow for dark mode toggle */
 @keyframes glowButton {
   0% { box-shadow: 0 0 0px rgba(100, 181, 246, 0.7); }
   50% { box-shadow: 0 0 20px rgba(100, 181, 246, 0.9); }
   100% { box-shadow: 0 0 0px rgba(100, 181, 246, 0.7); }
+}
+
+
+
+
+.rating-section {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.stars {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.star {
+  cursor: pointer;
+  color: gray;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.hovered,
+.star.selected {
+  color: gold;
 }
