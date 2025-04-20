@@ -139,7 +139,6 @@ const udupiForenoon = [
       });
   }
 
-
   const stars = document.querySelectorAll('.star');
   const summary = document.getElementById('rating-summary');
   
@@ -158,6 +157,7 @@ const udupiForenoon = [
   if (userRating !== null) {
     // Set the rating as selected if the user has already rated
     setRating(userRating);
+    disableRating(); // Disable the rating system if the user has already rated
   }
   
   stars.forEach(star => {
@@ -176,26 +176,9 @@ const udupiForenoon = [
     star.addEventListener('click', () => {
       const rating = parseInt(star.dataset.rating);
   
-      // If the user is clicking on their previously selected rating, delete it
-      if (hasRated && userRating === rating) {
-        // Reset the rating
-        totalRatings--;
-        ratingSum -= rating;
-  
-        localStorage.removeItem('hasRated'); // Remove the 'hasRated' flag
-        localStorage.removeItem('userRating'); // Remove the user's rating
-  
-        // Update the UI
-        clearRating();
-        updateSummary();
-  
-        alert('Your rating has been deleted. You can rate again.');
-        return;
-      }
-  
-      // Prevent rating if user has already rated, unless deleting or re-rating
-      if (hasRated && userRating !== rating) {
-        alert("You already rated. To change your rating, delete it first.");
+      // If the user has already rated, prevent them from rating again
+      if (hasRated) {
+        alert("You have already rated. Your rating is locked.");
         return;
       }
   
@@ -209,6 +192,7 @@ const udupiForenoon = [
   
       setRating(rating);
       updateSummary();
+      disableRating(); // Disable the rating system after user has rated
       alert(`Thanks for rating ${rating} star(s)!`);
     });
   });
@@ -243,4 +227,13 @@ const udupiForenoon = [
       summary.innerText = `⭐ ${average} from ${totalRatings} user(s)`;
     }
   }
+  
+  function disableRating() {
+    stars.forEach(star => {
+      star.classList.add('disabled');  // Add a disabled class to make them unclickable
+      star.removeEventListener('click', handleStarClick);  // Remove the click event listener
+    });
+  }
+  
+  // Optionally, you can add a 'disabled' class in your CSS to style the stars differently when disabled
   
