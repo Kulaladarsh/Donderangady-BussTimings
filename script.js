@@ -138,7 +138,6 @@ const udupiForenoon = [
         container.appendChild(li);
       });
   }
-
   const stars = document.querySelectorAll('.star');
   const summary = document.getElementById('rating-summary');
   
@@ -176,9 +175,9 @@ const udupiForenoon = [
     star.addEventListener('click', () => {
       const rating = parseInt(star.dataset.rating);
   
-      // If the user has already rated, prevent them from rating again
+      // If the user has already rated, prevent them from rating again and show an alert
       if (hasRated) {
-        alert("You have already rated. Your rating is locked.");
+        alert("You have already rated. Your rating is locked and cannot be changed.");
         return;
       }
   
