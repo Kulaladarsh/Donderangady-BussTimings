@@ -1,4 +1,6 @@
-// Bus schedules
+// ========================
+// Bus Schedules
+// ========================
 const udupiForenoon = [
   ["6:45 AM", "Hari"], ["7:15 AM", "Apsara"], ["7:30 AM", "Lakshmisha"],
   ["7:45 AM", "Ashok (Manai)"], ["8:00 AM", "Apsara"], ["8:20 AM", "Apsara"],
@@ -34,7 +36,9 @@ const ajekarAfternoon = [
   ["7:35 PM", "Apsara"], ["8:00 PM", "S.V.T"], ["8:40 PM", "Apsara"]
 ];
 
-// Function to parse time string into a Date object
+// ========================
+// Utilities
+// ========================
 function parseTime(timeStr) {
   const now = new Date();
   let [time, modifier] = timeStr.split(" ");
@@ -44,12 +48,11 @@ function parseTime(timeStr) {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
 }
 
-// Function to render bus times for a list
+// Render future buses only
 function renderList(id, buses) {
   const now = new Date();
   const container = document.getElementById(id);
   container.innerHTML = "";
-
   buses
     .filter(([time]) => parseTime(time) > now)
     .sort((a, b) => parseTime(a[0]) - parseTime(b[0]))
@@ -60,11 +63,10 @@ function renderList(id, buses) {
     });
 }
 
-// Function to render all bus times (no filtering)
+// Render all buses
 function renderAllList(id, buses) {
   const container = document.getElementById(id);
   container.innerHTML = "";
-
   buses
     .sort((a, b) => parseTime(a[0]) - parseTime(b[0]))
     .forEach(([time, name]) => {
@@ -74,7 +76,9 @@ function renderAllList(id, buses) {
     });
 }
 
-// Update clock every second
+// ========================
+// Clock
+// ========================
 function updateClock() {
   const clock = document.getElementById("clock");
   const now = new Date().toLocaleTimeString();
@@ -83,23 +87,42 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Render bus lists
+// ========================
+// Initial Rendering
+// ========================
 renderList("udupi-forenoon", udupiForenoon);
 renderList("udupi-afternoon", udupiAfternoon);
 renderList("ajekar-forenoon", ajekarForenoon);
 renderList("ajekar-afternoon", ajekarAfternoon);
 
+// ========================
 // Dark Mode Toggle
+// ========================
+// Get the dark mode toggle button
 const toggleBtn = document.getElementById("toggleMode");
+
+// Check and apply saved mode from localStorage on load
 if (localStorage.getItem("mode") === "dark") {
-  document.body.classList.add("dark");
+  document.body.classList.add("dark"); // Apply dark mode
+} else {
+  document.body.classList.remove("dark"); // Ensure light mode is applied
 }
+
+// Add click event to toggle dark/light mode
 toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  localStorage.setItem("mode", document.body.classList.contains("dark") ? "dark" : "light");
+
+  // Save the user's preference in localStorage
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("mode", "dark");
+  } else {
+    localStorage.setItem("mode", "light");
+  }
 });
 
-// Collapsible section functionality
+// ========================
+// Collapsible Section Handling
+// ========================
 document.querySelectorAll(".collapsible, .sub-collapsible").forEach(btn => {
   btn.addEventListener("click", () => {
     btn.classList.toggle("active");
@@ -108,19 +131,23 @@ document.querySelectorAll(".collapsible, .sub-collapsible").forEach(btn => {
   });
 });
 
-// Show All / Hide All button functionality
+// ========================
+// Show All / Hide All Button Handling
+// ========================
 document.querySelectorAll(".show-all-btn").forEach(button => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
     const heading = button.parentElement;
     const content = heading.nextElementSibling;
     const listId = content.id;
+
     const allBusesMap = {
       "udupi-forenoon": udupiForenoon,
       "udupi-afternoon": udupiAfternoon,
       "ajekar-forenoon": ajekarForenoon,
       "ajekar-afternoon": ajekarAfternoon
     };
+
     if (button.textContent === "Show All") {
       renderAllList(listId, allBusesMap[listId]);
       content.style.display = "block";
