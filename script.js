@@ -1,3 +1,4 @@
+// Bus schedules
 const udupiForenoon = [
   ["6:45 AM", "Hari"], ["7:15 AM", "Apsara"], ["7:30 AM", "Lakshmisha"],
   ["7:45 AM", "Ashok (Manai)"], ["8:00 AM", "Apsara"], ["8:20 AM", "Apsara"],
@@ -33,6 +34,7 @@ const ajekarAfternoon = [
   ["7:35 PM", "Apsara"], ["8:00 PM", "S.V.T"], ["8:40 PM", "Apsara"]
 ];
 
+// Function to parse time string into a Date object
 function parseTime(timeStr) {
   const now = new Date();
   let [time, modifier] = timeStr.split(" ");
@@ -42,6 +44,7 @@ function parseTime(timeStr) {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
 }
 
+// Function to render bus times for a list
 function renderList(id, buses) {
   const now = new Date();
   const container = document.getElementById(id);
@@ -57,6 +60,7 @@ function renderList(id, buses) {
     });
 }
 
+// Function to render all bus times (no filtering)
 function renderAllList(id, buses) {
   const container = document.getElementById(id);
   container.innerHTML = "";
@@ -70,6 +74,7 @@ function renderAllList(id, buses) {
     });
 }
 
+// Update clock every second
 function updateClock() {
   const clock = document.getElementById("clock");
   const now = new Date().toLocaleTimeString();
@@ -78,11 +83,13 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// Render bus lists
 renderList("udupi-forenoon", udupiForenoon);
 renderList("udupi-afternoon", udupiAfternoon);
 renderList("ajekar-forenoon", ajekarForenoon);
 renderList("ajekar-afternoon", ajekarAfternoon);
 
+// Dark Mode Toggle
 const toggleBtn = document.getElementById("toggleMode");
 if (localStorage.getItem("mode") === "dark") {
   document.body.classList.add("dark");
@@ -92,18 +99,16 @@ toggleBtn.addEventListener("click", () => {
   localStorage.setItem("mode", document.body.classList.contains("dark") ? "dark" : "light");
 });
 
+// Collapsible section functionality
 document.querySelectorAll(".collapsible, .sub-collapsible").forEach(btn => {
   btn.addEventListener("click", () => {
     btn.classList.toggle("active");
     const next = btn.nextElementSibling;
-    if (next.style.display === "block") {
-      next.style.display = "none";
-    } else {
-      next.style.display = "block";
-    }
+    next.style.display = next.style.display === "block" ? "none" : "block";
   });
 });
 
+// Show All / Hide All button functionality
 document.querySelectorAll(".show-all-btn").forEach(button => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
