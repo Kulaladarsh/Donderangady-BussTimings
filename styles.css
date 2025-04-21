@@ -10,6 +10,7 @@ html, body {
   flex-direction: column;
   transition: background 0.3s, color 0.3s;
   scroll-behavior: smooth;
+  width: 100%; /* Ensures the body stretches to full width */
 }
 
 body {
@@ -19,6 +20,12 @@ body {
 .dark {
   background: #121212;
   color: #f1f1f1;
+  width: 100%; /* Ensures the dark mode background stretches to full width */
+}
+
+/* Ensure the dark background extends fully */
+.dark, .dark body {
+  background-color: #121212; /* Ensures that the background is fully black in dark mode */
 }
 
 /* === Container === */
@@ -318,9 +325,7 @@ li {
   100% { box-shadow: 0 0 0px rgba(100, 181, 246, 0.7); }
 }
 
-
-
-
+/* === Rating Section === */
 .rating-section {
   margin: 10px 0;
   text-align: center;

@@ -8,12 +8,13 @@
 </head>
 <body>
   <div class="container">
-    <header><center><h1>Donderangady Bus Timings</h1>
-      <div id="clock"></div> </center>
-      
+    <header>
+      <center>
+        <h1>Donderangady Bus Timings</h1>
+        <div id="clock"></div>
+      </center>
       <p class="subtitle">🚍 Donderangady Bus Schedules at Your Fingertips! 🕒 Plan your ride, stay on time, and travel with ease! 🌟</p>
-
-      <button id="toggleMode">🌗Dark/Light</button>
+      <button id="toggleMode">🌗 Dark/Light</button>
     </header>
 
     <div class="schedule">
@@ -21,10 +22,10 @@
       <div class="column">
         <h2 class="collapsible">Donderangady to Udupi</h2>
         <div class="nested">
-          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn" aria-label="Show all buses for Forenoon">Show All</button></h3>
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn">Show All</button></h3>
           <ul class="content" id="udupi-forenoon"></ul>
 
-          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn" aria-label="Show all buses for Afternoon">Show All</button></h3>
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn">Show All</button></h3>
           <ul class="content" id="udupi-afternoon"></ul>
         </div>
       </div>
@@ -33,10 +34,10 @@
       <div class="column">
         <h2 class="collapsible">Donderangady to Ajekar</h2>
         <div class="nested">
-          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn" aria-label="Show all buses for Forenoon">Show All</button></h3>
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn">Show All</button></h3>
           <ul class="content" id="ajekar-forenoon"></ul>
 
-          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn" aria-label="Show all buses for Afternoon">Show All</button></h3>
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn">Show All</button></h3>
           <ul class="content" id="ajekar-afternoon"></ul>
         </div>
       </div>
@@ -44,29 +45,16 @@
   </div>
 
   <footer class="footer">
-  <div class="footer-content">
-    <p>Developed by <strong>Adarsh Kulal</strong></p>
-
-    <!-- ⭐ Rating Section -->
-    <div class="rating-section">
-      <div class="stars">
-        <span class="star" data-rating="1">⭐</span>
-        <span class="star" data-rating="2">⭐</span>
-        <span class="star" data-rating="3">⭐</span>
-        <span class="star" data-rating="4">⭐</span>
-        <span class="star" data-rating="5">⭐</span>
+    <div class="footer-content">
+      <p>Developed by <strong>Adarsh Kulal</strong></p>
+      <div class="footer-contact">
+        <span>Follow on </span>
+        <a href="mailto:kulaladarsh1@gmail.com" class="footer-icon-link">
+          <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="gmail-icon" />
+        </a>
       </div>
-      <div id="rating-summary">Loading...</div>
     </div>
-
-    <div class="footer-contact">
-      <span>Follow on </span>
-      <a href="mailto:kulaladarsh1@gmail.com" aria-label="Email Adarsh Kulal" class="footer-icon-link">
-        <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="gmail-icon" />
-      </a>
-    </div>
-  </div>
-</footer>
+  </footer>
 
   <script src="script.js"></script>
 </body>
