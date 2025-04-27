@@ -48,7 +48,20 @@ function parseTime(timeStr) {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
 }
 
-// Render future buses only
+function calculateTravelTime(distanceKm) {
+  const averageSpeed = 40; // Assuming the bus travels at 40 km/h
+  return (distanceKm / averageSpeed) * 60; // Convert to minutes
+}
+
+function predictDepartureTime(arrivalTimeStr, distanceFromUdupi) {
+  const arrivalTime = parseTime(arrivalTimeStr);
+  const travelTime = calculateTravelTime(distanceFromUdupi);
+  
+  // Subtract the travel time to estimate the departure time
+  arrivalTime.setMinutes(arrivalTime.getMinutes() - travelTime);
+  return arrivalTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
 function renderList(id, buses) {
   const now = new Date();
   const container = document.getElementById(id);
@@ -63,7 +76,6 @@ function renderList(id, buses) {
     });
 }
 
-// Render all buses
 function renderAllList(id, buses) {
   const container = document.getElementById(id);
   container.innerHTML = "";
@@ -88,27 +100,16 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // ========================
-// Initial Rendering
-// ========================
-renderList("udupi-forenoon", udupiForenoon);
-renderList("udupi-afternoon", udupiAfternoon);
-renderList("ajekar-forenoon", ajekarForenoon);
-renderList("ajekar-afternoon", ajekarAfternoon);
-
-// ========================
 // Dark Mode Toggle
 // ========================
-// Get the dark mode toggle button
 const toggleBtn = document.getElementById("toggleMode");
 
-// Check and apply saved mode from localStorage on load
 if (localStorage.getItem("mode") === "dark") {
   document.body.classList.add("dark"); // Apply dark mode
 } else {
   document.body.classList.remove("dark"); // Ensure light mode is applied
 }
 
-// Add click event to toggle dark/light mode
 toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
@@ -158,4 +159,27 @@ document.querySelectorAll(".show-all-btn").forEach(button => {
       button.textContent = "Show All";
     }
   });
+});
+
+// ========================
+// Initial Rendering
+// ========================
+renderList("udupi-forenoon", udupiForenoon);
+renderList("udupi-afternoon", udupiAfternoon);
+renderList("ajekar-forenoon", ajekarForenoon);
+renderList("ajekar-afternoon", ajekarAfternoon);
+
+// Predict departure times for buses traveling to Udupi from Ajekar
+const distanceFromAjekarToUdupi = 27.6;
+const distanceFromDonderagdiToAjekar = 7.7;
+
+ajekarForenoon.forEach(([time, bus]) => {
+  const departureTime = predictDepartureTime(time, distanceFromAjekarToUdupi);
+  console.log(`Bus ${bus} departs from Udupi at: ${departureTime}`);
+});
+
+// Similarly, you can also handle the buses traveling from Udupi to Ajekar
+udopiForenoon.forEach(([time, bus]) => {
+  const departureTime = predictDepartureTime(time, distanceFromDonderagdiToAjekar);
+  console.log(`Bus ${bus} departs from Udupi at: ${departureTime}`);
 });
