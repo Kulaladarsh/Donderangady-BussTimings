@@ -1,0 +1,340 @@
+/* === Global Reset & Base Styles === */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9fb;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body {
+  flex: 1;
+}
+
+/* === Container === */
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+  flex: 1;
+}
+
+/* === Header === */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  animation: fadeSlideUp 1s ease-out both;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin: 0 0 10px;
+  animation: fadeSlideUp 1.2s ease-out both;
+  background: linear-gradient(90deg, #1976d2, #64b5f6);
+  -webkit-background-clip: text;
+  background-clip: text; /* ✅ Add this line */
+  -webkit-text-fill-color: transparent;
+}
+
+
+.clock {
+  font-size: 1.6rem;
+  font-weight: bold;
+  animation: rotateClock 60s linear infinite, fadeSlideUp 1.5s ease-out both;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: gray;
+  margin-top: 10px;
+}
+
+/* === Schedule Section === */
+.schedule {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  min-width: 280px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  animation: fadeSlideUp 1s ease-out both;
+  transition: transform 0.2s ease;
+}
+
+.column:hover {
+  transform: translateY(-4px);
+}
+
+/* === Collapsible Sections === */
+.collapsible, .sub-collapsible {
+  background: #e3f2fd;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border-left: 5px solid #1976d2;
+  transition: all 0.3s ease;
+}
+
+.collapsible:hover, .sub-collapsible:hover {
+  background: #bbdefb;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+.collapsible.active, .sub-collapsible.active {
+  background: #90caf9;
+}
+
+/* === Content Section === */
+.content {
+  display: none;
+  padding: 10px 15px;
+  margin-top: 8px;
+  background-color: #f5f5f5;
+  border-left: 2px dashed #ccc;
+  color: #222;
+}
+
+/* === List Items === */
+li {
+  background: #eeeeee;
+  margin: 6px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* === Button Styles === */
+button,
+.show-all-btn,
+#toggleMode,
+.rating-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover,
+.show-all-btn:hover,
+.rating-btn:hover,
+#toggleMode:hover {
+  animation: futuristicHover 0.5s ease-in-out forwards;
+}
+
+.show-all-btn,
+#toggleMode {
+  background-color: #1976d2;
+  color: white;
+}
+
+.rating-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.rating-btn:hover {
+  background-color: #0056b3;
+}
+
+/* === Star Rating === */
+.star-form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.rating-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.star-rating {
+  direction: rtl;
+  display: inline-block;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.star-rating label:hover {
+  transform: scale(1.2);
+}
+
+/* === Messages === */
+.message {
+  max-width: 400px;
+  margin: 15px auto;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* === Footer === */
+.modern-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c3e50;
+  color: white;
+  padding: 16px 30px;
+  font-size: 0.95rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.footer-left {
+  text-align: left;
+}
+.footer-right {
+  text-align: right;
+}
+
+.footer-email {
+  color: #f1c40f;
+  text-decoration: none;
+}
+
+.footer-email:hover {
+  text-decoration: underline;
+}
+
+/* === Dark Mode === */
+.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+.dark-mode .column,
+.dark-mode .collapsible,
+.dark-mode .sub-collapsible,
+.dark-mode .content,
+.dark-mode li {
+  background-color: #1e1e1e;
+  color: #fff !important;
+}
+
+.dark-mode .collapsible,
+.dark-mode .sub-collapsible {
+  border-left-color: #64b5f6;
+}
+
+.dark-mode button,
+.dark-mode .show-all-btn,
+.dark-mode .rating-btn,
+.dark-mode #toggleMode {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+.dark-mode .modern-footer {
+  background-color: #1a1a1a;
+  color: #ccc;
+}
+
+.dark-mode .footer-email {
+  color: #ffeb3b;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .schedule {
+    flex-direction: column;
+  }
+
+  .header {
+    padding: 30px 10px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .clock {
+    font-size: 1.2rem;
+  }
+
+  .modern-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+/* === Animations === */
+@keyframes rotateClock {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(25, 118, 210, 0.6);
+  }
+}
+
+@keyframes futuristicHover {
+  0% {
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: scale(1.05);
+    filter: hue-rotate(20deg);
+  }
+}

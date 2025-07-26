@@ -1,6 +1,4 @@
-// ========================
-// Bus Schedules
-// ========================
+
 const udupiForenoon = [
   ["6:45 AM", "Hari"], ["7:15 AM", "Apsara"], ["7:30 AM", "Lakshmisha"],
   ["7:45 AM", "Ashok (Manai)"], ["8:00 AM", "Apsara"], ["8:20 AM", "Apsara"],
@@ -99,27 +97,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ========================
-// Dark Mode Toggle
-// ========================
-const toggleBtn = document.getElementById("toggleMode");
-
-if (localStorage.getItem("mode") === "dark") {
-  document.body.classList.add("dark"); // Apply dark mode
-} else {
-  document.body.classList.remove("dark"); // Ensure light mode is applied
-}
-
-toggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  // Save the user's preference in localStorage
-  if (document.body.classList.contains("dark")) {
-    localStorage.setItem("mode", "dark");
-  } else {
-    localStorage.setItem("mode", "light");
-  }
-});
 
 // ========================
 // Collapsible Section Handling
@@ -179,7 +156,10 @@ ajekarForenoon.forEach(([time, bus]) => {
 });
 
 // Similarly, you can also handle the buses traveling from Udupi to Ajekar
-udopiForenoon.forEach(([time, bus]) => {
+udupiForenoon.forEach(([time, bus]) => {
   const departureTime = predictDepartureTime(time, distanceFromDonderagdiToAjekar);
   console.log(`Bus ${bus} departs from Udupi at: ${departureTime}`);
 });
+
+///toggel button 
+

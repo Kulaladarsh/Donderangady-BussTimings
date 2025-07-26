@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Donderangady Bus Timings</title>
-  <link rel="stylesheet" href="styles.css" /> <!-- Optional: For your CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"><!-- Optional: For your CSS -->
 </head>
 <body class="dark">
   <!-- Header Section -->
@@ -15,7 +16,7 @@
         <div id="clock"></div>
       </center>
       <p class="subtitle">🚍 Donderangady Bus Schedules at Your Fingertips! 🕒 Plan your ride, stay on time, and travel with ease! 🌟</p>
-      <button id="toggleMode">🌗 Dark/Light</button>
+
     </header>
 
     <!-- Bus Timings Schedule -->
@@ -48,18 +49,50 @@
 
 
   <!-- Footer Section -->
-  <footer class="footer">
-    <div class="footer-content">
-      <p>Developed by <strong>Adarsh Kulal</strong></p>
-      <div class="footer-contact">
-        <span>Contact on </span>
-        <a href="mailto:kulaladarsh1@gmail.com" class="footer-icon-link">
-          <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="gmail-icon" />
-        </a>
-      </div>
+<!-- Rating Message or Form -->
+{% if msg == 'thank_you' %}
+  <div id="rating-message" class="message success">Thanks for giving rating! 😊</div>
+{% elif msg == 'already_rated' %}
+  <div id="rating-message" class="message warning">You already gave a rating! 🙏</div>
+{% else %}
+  <form class="star-form" method="POST" action="/rate">
+    <label class="rating-label">Give Rating:</label>
+    <div class="star-rating">
+      {% for i in range(5, 0, -1) %}
+        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+        <label for="star{{ i }}">⭐</label>
+      {% endfor %}
     </div>
-  </footer>
+    <button type="submit" class="rating-btn">Give Rating</button>
+  </form>
+{% endif %}
 
-  <script src="script.js"></script> <!-- Your JS logic -->
+<script>
+  // Hide the message after 3 seconds
+  setTimeout(function() {
+    const msg = document.getElementById("rating-message");
+    if (msg) {
+      msg.style.display = "none";
+    }
+  }, 3000);
+</script>
+
+
+<footer class="modern-footer">
+  <div class="footer-left">
+    Developed by <strong>Adarsh</strong>
+  </div>
+  <div class="footer-center">
+    👁️‍🗨️ Total Visitors: {{ visitor_count }}
+  </div>
+  <div class="footer-right">
+    📧 Contact: <a href="mailto:kulaladarsh1@gmail.com" class="footer-email">adarsh@example.com</a>
+  </div>
+</footer>
+
+
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+ <!-- Your JS logic -->
 </body>
 </html>
