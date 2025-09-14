@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donderangady Bus Timings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"><!-- Optional: For your CSS -->
+</head>
+<body class="dark">
+  <!-- Header Section -->
+  <div class="container">
+    <header>
+      <center>
+        <h1>Donderangady Bus Timings</h1>
+        <div id="clock"></div>
+      </center>
+      <p class="subtitle">🚍 Donderangady Bus Schedules at Your Fingertips! 🕒 Plan your ride, stay on time, and travel with ease! 🌟</p>
+
+    </header>
+
+    <!-- Bus Timings Schedule -->
+    <div class="schedule">
+      <!-- Udupi Route -->
+      <div class="column">
+        <h2 class="collapsible">Donderangady to Udupi</h2>
+        <div class="nested">
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn">Show All</button></h3>
+          <ul class="content" id="udupi-forenoon"></ul>
+
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn">Show All</button></h3>
+          <ul class="content" id="udupi-afternoon"></ul>
+        </div>
+      </div>
+
+      <!-- Ajekar Route -->
+      <div class="column">
+        <h2 class="collapsible">Donderangady to Ajekar</h2>
+        <div class="nested">
+          <h3 class="sub-collapsible">Forenoon <button class="show-all-btn">Show All</button></h3>
+          <ul class="content" id="ajekar-forenoon"></ul>
+
+          <h3 class="sub-collapsible">Afternoon <button class="show-all-btn">Show All</button></h3>
+          <ul class="content" id="ajekar-afternoon"></ul>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- Footer Section -->
+<!-- Rating Message or Form -->
+{% if msg == 'thank_you' %}
+  <div id="rating-message" class="message success">Thanks for giving rating! 😊</div>
+{% elif msg == 'already_rated' %}
+  <div id="rating-message" class="message warning">You already gave a rating! 🙏</div>
+{% else %}
+  <form class="star-form" method="POST" action="/rate">
+    <label class="rating-label">Give Rating:</label>
+    <div class="star-rating">
+      {% for i in range(5, 0, -1) %}
+        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+        <label for="star{{ i }}">⭐</label>
+      {% endfor %}
+    </div>
+    <button type="submit" class="rating-btn">Give Rating</button>
+  </form>
+{% endif %}
+
+<script>
+  // Hide the message after 3 seconds
+  setTimeout(function() {
+    const msg = document.getElementById("rating-message");
+    if (msg) {
+      msg.style.display = "none";
+    }
+  }, 3000);
+</script>
+
+
+<footer class="modern-footer">
+  <div class="footer-left">
+    Developed by <strong>Adarsh</strong>
+  </div>
+  <div class="footer-center">
+    👁️‍🗨️ Total Visitors: {{ visitor_count }}
+  </div>
+  <div class="footer-right">
+    📧 Contact: <a href="mailto:kulaladarsh1@gmail.com" class="footer-email">adarsh@example.com</a>
+  </div>
+</footer>
+
+
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+ <!-- Your JS logic -->
+</body>
+</html>
